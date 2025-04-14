@@ -11,7 +11,7 @@ The **Questions App** is an Angular-based application designed to complete quest
 ![App Preview 1](assets/preview.png)
 ![App Preview 2](assets/preview2.png)
 
----
+#### Live Preview: [https://angular-quizz-app.vercel.app/](https://angular-quizz-app.vercel.app/)
 
 ### Project Structure
 
