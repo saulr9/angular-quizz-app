@@ -1,0 +1,52 @@
+@let questionnaire = questionnaireService.getQuestionnaire();
+<mat-card
+  appearance="outlined"
+  class="!bg-white dark:bg-gray-800 flex p-4 flex-col rounded-lg !shadow-md !border-none"
+>
+  <div class="!flex !px-0 justify-between">
+    <span class="font-bold"> Questionnaire Progress </span>
+
+    <app-questionnaire-countdown
+      [timeLimitInMinutes]="questionnaire.timeLimitInMinutes"
+    ></app-questionnaire-countdown>
+  </div>
+  <hr class="my-2" />
+  <mat-card-content class="!p-0 !flex h-full flex-col justify-center">
+    <div>
+      <span class="block text-center font-bold">
+        Question N° {{ formattedStep$ | async }} of {{ totalQuestions }}</span
+      >
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-800 dark:text-gray-200">
+          {{ questionnaire.title }}
+        </span>
+
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          {{ questionnaire.description }}
+        </p>
+
+        <span class="text-sm">
+          Questions: {{ questionnaire.questionCount }}
+        </span>
+        <span class="text-sm">
+          Percentage to Pass:
+          {{ questionnaire.percentageToPass }} %
+        </span>
+        <span class="text-sm">
+          Time Limit:
+          {{ questionnaire.timeLimitInMinutes }} minutes
+        </span>
+      </div>
+    </div>
+
+    <a
+      (click)="questionnaireService.resetQuestionnaire()"
+      mat-raised-button
+      *ngIf="isCompleted$ | async"
+      mat-button
+      class="text-center underline cursor-pointer text-sm text-gray-500 dark:text-gray-400"
+    >
+      Reset Questionnaire
+    </a>
+  </mat-card-content>
+</mat-card>

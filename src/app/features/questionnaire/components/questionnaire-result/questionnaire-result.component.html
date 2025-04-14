@@ -1,0 +1,37 @@
+@let score = result()?.score || 0;
+
+<div class="w-full pt-8 pb-4 relative">
+  <h3 class="text-xl font-bold text-center">{{ result()?.messageTitle }}</h3>
+  <p class="text-center">
+    {{ result()?.messageBody }}
+  </p>
+  <div class="flex flex-col items-center gap-4 my-4" *ngIf="score > 0">
+    <div class="relative inline-block mb-4">
+      <mat-progress-spinner
+        mode="determinate"
+        [value]="score"
+        diameter="100"
+        strokeWidth="10"
+      ></mat-progress-spinner>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span class="text-xl">{{ score }}%</span>
+      </div>
+    </div>
+  </div>
+  <canvas
+    #confettiCanvas
+    class="absolute inset-0 w-full h-full pointer-events-none"
+    *ngIf="result()?.isPassed"
+  ></canvas>
+
+  <button
+    mat-fab
+    extended
+    class="!flex mx-auto"
+    (click)="launchConfetti()"
+    *ngIf="result()?.isPassed"
+  >
+    <mat-icon>share</mat-icon>
+    Share Results
+  </button>
+</div>

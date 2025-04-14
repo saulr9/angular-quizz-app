@@ -1,0 +1,10 @@
+<div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+  <mat-icon>timer</mat-icon>
+  Time Remaining:
+
+  <countdown
+    [config]="{ leftTime: timeLimitInSeconds, format: 'mm:ss' }"
+    (event)="onCountdownEvent($event)"
+    #cd
+  ></countdown>
+</div>

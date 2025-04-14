@@ -1,0 +1,25 @@
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3 h-full">
+  <div class="col-span-2 md:col-span-2 lg:col-span-2 flex flex-col h-full">
+    <div
+      class="!bg-white dark:bg-gray-800 flex flex-col p-4 rounded-lg !shadow-md !border-none"
+    >
+      <app-questionnaire-form
+        *ngIf="!(isCompleted$ | async) && !(isSubmitting$ | async)"
+        [questions]="questionnaire()!.questionsWithOptions"
+      ></app-questionnaire-form>
+
+      <app-questionnaire-result
+        *ngIf="isCompleted$ | async"
+      ></app-questionnaire-result>
+
+      <mat-spinner
+        class="mx-auto my-4"
+        [diameter]="50"
+        *ngIf="isSubmitting$ | async"
+      ></mat-spinner>
+    </div>
+  </div>
+  <div class="col-span-1 flex flex-col h-full">
+    <app-questionnaire-progress></app-questionnaire-progress>
+  </div>
+</div>

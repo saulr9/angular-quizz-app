@@ -1,0 +1,89 @@
+<form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()" class="min-h-52">
+  <div formArrayName="answers">
+    <div>
+      <div *ngFor="let question of questions(); let i = index">
+        <div [formGroupName]="i" *ngIf="(currentStep$ | async) === i">
+          <h3>
+            {{ question.title }}
+
+            <span
+              *ngIf="question.type === 'multiple-choice'"
+              class="text-sm text-gray-500 dark:text-gray-400"
+            >
+              - Select {{ question.correctAnswerCount }} answers
+            </span>
+          </h3>
+          <hr class="my-2" />
+
+          <!-- Single-choice question -->
+          <div *ngIf="question.type === 'single-choice'">
+            <mat-radio-group
+              formControlName="selectedOptionIds"
+              class="flex flex-col"
+            >
+              <mat-radio-button
+                *ngFor="let option of question.options"
+                [value]="option.id"
+              >
+                {{ option.text }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <!-- Multiple-choice question -->
+          <div *ngIf="question.type === 'multiple-choice'">
+            <div formArrayName="selectedOptionIds">
+              <mat-checkbox
+                *ngFor="let option of question.options; let j = index"
+                [formControlName]="j"
+                class="flex items-center w-full"
+              >
+                {{ option.text }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-2 mt-4">
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="previousStep()"
+      [disabled]="(currentStep$ | async) === 0"
+    >
+      Previous
+    </button>
+
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="nextStep()"
+      [disabled]="
+        (currentStep$ | async) === questions().length - 1 ||
+        isNextButtonDisabled()
+      "
+      *ngIf="(currentStep$ | async) !== questions().length - 1"
+    >
+      Next
+    </button>
+    <button
+      mat-flat-button
+      extended
+      type="submit"
+      color="primary"
+      class=""
+      *ngIf="(currentStep$ | async) === questions().length - 1"
+      [disabled]="
+        !questionnaireForm.valid ||
+        (currentStep$ | async) !== questions().length - 1
+      "
+    >
+      Submit
+    </button>
+  </div>
+</form>

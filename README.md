@@ -1,59 +1,126 @@
-# Questions
+# Developer Documentation
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.2.
+## Questions App
 
-## Development server
+### Overview
 
-To start a local development server, run:
+The **Questions App** is an Angular-based application designed to complete questionnaires. It features a countdown timer, progress tracking, and result evaluation.
+
+### Preview
+
+![App Preview 1](assets/preview.png)
+![App Preview 2](assets/preview2.png)
+
+---
+
+### Project Structure
+
+The project follows a modular structure for scalability and maintainability:
+
+```
+.editorconfig
+.gitignore
+angular.json
+package.json
+README.md
+tailwind.config.js
+tsconfig.app.json
+tsconfig.json
+tsconfig.spec.json
+src/
+  index.html
+  main.ts
+  styles.css
+  app/
+    app.component.ts
+    app.component.html
+    app.component.css
+    features/
+      questionnaire/
+        components/
+        services/
+    shared/
+      data/
+      enums/
+      interfaces/
+```
+
+---
+
+### Key Features
+
+- **Dynamic Questionnaires**: Supports single-choice and multiple-choice questions.
+- **Countdown Timer**: Automatically submits the questionnaire when time runs out.
+- **Progress Tracking**: Displays the current question and progress.
+- **Result Evaluation**: Shows the user's score and pass/fail status.
+
+---
+
+### Setup Instructions
+
+#### Prerequisites
+
+- Node.js (v16 or higher)
+- Angular CLI (v19.1.2 or higher)
+
+#### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd questions
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+---
+
+### Development
+
+#### Start the Development Server
+
+Run the following command to start the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Access the app at `http://localhost:4200/`.
 
-## Code scaffolding
+#### Build the Project
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+To build the project for production:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+#### Run Unit Tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Execute unit tests using Karma:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+### Code Highlights
 
-```bash
-ng e2e
-```
+#### Countdown Timer
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The countdown timer is implemented in the `QuestionnaireCountDownComponent` located in `src/app/features/questionnaire/components/countdown/countdown.component.ts`. It uses the `ngx-countdown` library and integrates with the `QuestionnaireCountdownService` to manage countdown states.
 
-## Additional Resources
+#### Questionnaire Form
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The questionnaire form is managed by the `QuestionnaireFormComponent` located in `src/app/features/questionnaire/components/questionnaire-form/questionnaire-form.component.ts`. It dynamically generates form controls based on the question type and validates user input.
+
+---
+
+Enjoy using the Questions App!
